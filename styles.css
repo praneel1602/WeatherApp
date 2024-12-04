@@ -1,0 +1,146 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background:#222;
+}
+.card{
+    width:90%;
+    color:black;
+    max-width:  470px; 
+    background-color: aquamarine;
+    padding: 50px 40px;
+    border-radius: 18px;
+    text-align: center;
+    margin: 100px auto 0;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+.search{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ .search input{
+    border:0;
+    outline: 0;
+    background: #ebfffc;
+    color:#555;
+    padding: 20px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.search button{
+    border:0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width:60px;
+    height: 60px;
+    cursor:pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.search button img{
+    width: 60px;
+}
+.city img{
+    width: 150px;
+    border-radius: 50%;
+    height:150px;
+}
+.city h1{
+    font-size: 50px;
+    font-weight: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.details {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.col img {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.temp, .humidity, .wind {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.col p:last-child {
+    font-size: 14px;
+    color: #666;
+}
+.table{
+    background-color: #f0f0f0;
+    color: #222;
+    text-align: center;
+    margin:0 auto;
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 12px;
+}
+.table h2{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+th,td{
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    color: #222;
+}
+th{
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+td{
+    background-color: white;
+    color: #123;
+}
+table,th,td{
+    border: 1px solid black;
+}
+tr,th,td{
+    tr:hover {background-color: #D6EEEE;}
+}

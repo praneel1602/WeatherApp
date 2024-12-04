@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Weather App</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" spellcheck="false" placeholder="Enter the Location">
+            <button><img src="images/search.jpeg" alt="Search" class="search-icon"></button>
+        </div>
+        <div class="city">
+            <img src="images/clear.jpeg" alt="weather" class="weathericon">
+            <br>
+            <h1>Thane</h1>
+        </div>
+        <div class="details">
+            <div class="col">
+                <img src="images/humidity.png" alt="Humidity">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p>Humidity</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/temp.png" alt="Temperature">
+                <div>
+                    <p class="temp">25°C</p>
+                    <p>Temperature</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/wind.jpg" alt="Wind Speed">
+                <div>
+                    <p class="wind">50 kmph</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table">
+        <h2>Commonly Searched Cities</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>City Name</th>
+                    <th>Weather Condition</th>
+                    <th>Temperature</th>
+                    <th>Wind Speed</th>
+                    <th>Humidity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic content will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

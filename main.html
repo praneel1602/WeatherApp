@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Weather App</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" spellcheck="false" placeholder="Enter the Location">
+            <button><img src="images/search.jpeg" alt="Search" class="search-icon"></button>
+        </div>
+        <div class="city">
+            <img src="images/clear.jpeg" alt="weather" class="weathericon">
+            <br>
+            <h1>Thane</h1>
+        </div>
+        <div class="details">
+            <div class="col">
+                <img src="images/humidity.png" alt="Humidity">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p>Humidity</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/temp.png" alt="Temperature">
+                <div>
+                    <p class="temp">25°C</p>
+                    <p>Temperature</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/wind.jpg" alt="Wind Speed">
+                <div>
+                    <p class="wind">50 kmph</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table">
+        <h2>Some Commonly Searched Cities of the World's Weather Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>City Name</th>
+                    <th>Weather Condition</th>
+                    <th>Temperature</th>
+                    <th>Wind Speed</th>
+                    <th>Humidity</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        // Fetch API key from .env file using fetch
+        async function getApiKey() {
+            const response = await fetch('.env');
+            const text = await response.text();
+            const apiKey = text.split('=')[1].trim();
+            return apiKey;
+        }
+
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search button");
+        const searchimg = document.querySelector(".city img");
+
+        async function checkWeather(city) {
+            const apiKey = await getApiKey();
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            const result = await response.json();
+            document.querySelector(".city h1").innerHTML = result.name;
+            document.querySelector(".humidity").innerHTML = result.main.humidity + "%";
+            document.querySelector(".temp").innerHTML = Math.round(result.main.temp) + "°C";
+            document.querySelector(".wind").innerHTML = result.wind.speed + " Km/Hr";
+
+            updateWeatherIcon(result.weather[0].main, searchimg);
+        }
+
+        function updateWeatherIcon(condition, img) {
+            switch (condition) {
+                case 'Clouds':
+                    img.src = "images/cloudy.png";
+                    break;
+                case 'Clear':
+                    img.src = "images/clear.jpeg";
+                    break;
+                case 'Rain':
+                    img.src = "images/rain.jpeg";
+                    break;
+                case 'Drizzle':
+                    img.src = "images/drizzle.png";
+                    break;
+                case 'Mist':
+                    img.src = "images/mist.jpeg";
+                    break;
+                default:
+                    img.src = "images/clear.jpeg";
+            }
+        }
+
+        async function updateTable(cities) {
+            const apiKey = await getApiKey();
+            const tbody = document.querySelector("tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            for (let city of cities) {
+                const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+                const result = await response.json();
+
+                const newRow = document.createElement("tr");
+
+                const cityCell = document.createElement("td");
+                cityCell.textContent = result.name;
+                newRow.appendChild(cityCell);
+
+                const weatherCell = document.createElement("td");
+                const weatherIcon = document.createElement("img");
+                weatherIcon.style.width = "30px";
+                updateWeatherIcon(result.weather[0].main, weatherIcon);
+                weatherCell.appendChild(weatherIcon);
+                weatherCell.appendChild(document.createTextNode(" " + result.weather[0].main));
+                newRow.appendChild(weatherCell);
+
+                const tempCell = document.createElement("td");
+                tempCell.textContent = Math.round(result.main.temp) + "°C";
+                newRow.appendChild(tempCell);
+
+                const windCell = document.createElement("td");
+                windCell.textContent = result.wind.speed + " Km/Hr";
+                newRow.appendChild(windCell);
+
+                const humidCell = document.createElement("td");
+                humidCell.textContent = result.main.humidity + "%";
+                newRow.appendChild(humidCell);
+
+                tbody.appendChild(newRow);
+            }
+        }
+
+        searchbtn.addEventListener("click", () => {
+            checkWeather(searchbox.value);
+        });
+
+        // Predefined cities to display in the table
+        const commonCities = ["New York", "London", "Mumbai", "Delhi", "Bengaluru"];
+        updateTable(commonCities);
+
+        window.addEventListener("load", () => {
+            checkWeather("Mumbai");
+        });
+    </script>
+</body>
+
+</html>
